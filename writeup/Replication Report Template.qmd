@@ -14,6 +14,17 @@ format:
 
 [No abstract is needed.]  Each replication project will have a straightforward, no frills report of the study and results.  These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of data collection.  Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for replication, and any other essential information. You will likely contact the authors of the original study, so this should be professional and forward facing. It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
 
+#This paper was one of the inspirations for my first year project. It includes a social implicit learning paradigm, which is what I am doing in my first year project. As the title of the paper suggests, it looks at social intuition, which is my central research interest. 
+#The study is also done in my population of interest, autistic individuals, with neurotypical people as controls. I also believe that replicating this study is doable, especially if I can get the face morphs used from the authors. It doesn’t use any skills that are too 
+#far out of my reach, but still presents some opportunities for growth.
+
+#In the acquisition phase, face morphs of dynamic facial expressions (happy or angry) in which their gaze shifts towards or away from the participant will be shown to participants across multiple trials. All faces are either identity A or B. 
+#Identity A and B are showing either a positive or negative disposition towards the participant. In the test phase, implicit learning was tested via morphs of the facial expressions of both identities put together, progressively shifting towards 
+#more of one identity than the other, while participants indicated whether the identity was closer to A or B. The smiling and the frowning faces were tested separately. The idea was that if the participant had learned the disposition of the two 
+#identities, they would be able to indicate whether the face was more A or B. 
+
+#Ideally I will be able to get the face stimuli from the authors to get the closest replication. Then the remaining task is to code the experiment to run the face stimuli 
+#correctly. I would likely use psychopy for that, which I anticipate will pose slight challenges but nothing I can’t overcome. One of the challenges may be getting enough autistic participants fast enough.
 
 ## Methods
 
