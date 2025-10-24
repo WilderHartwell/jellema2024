@@ -18,28 +18,29 @@ This paper was one of the inspirations for my first year project. It includes a 
 
 In the acquisition phase, face morphs of dynamic facial expressions (happy or angry) in which their gaze shifts towards or away from the participant will be shown to participants across multiple trials. All faces are either identity A or B. Identity A and B are showing either a positive or negative disposition towards the participant. In the test phase, implicit learning was tested via morphs of the facial expressions of both identities put together, progressively shifting towards more of one identity than the other, while participants indicated whether the identity was closer to A or B. The smiling and the frowning faces were tested separately. The idea was that if the participant had learned the disposition of the two identities, they would be able to indicate whether the face was more A or B. 
 
-There is also a nonsocial task in which a circle and a square were used to denote identities A and B. Light blue was used instead of joy and dark blue was used instead of anger. A shift between the two blues served as a shift from joy to anger and vice versa. Additionally, a small red dot placed in the top right or bottom left of the shape and then moved was used in place of gaze direction. Other than the difference in stimuli, the acquisition and test phases were the same as in the social task.
+I will give 56 trials split into two blocks of 28 trials in the acquisition phase. The response in the test phase will ask participants to press "f" or "j" to indicate that they think the face is more identity A or B after viewing the video clip on each trial. In the nonsocial task, participants will do the same thing except identities A and B are actually circle vs. square.
 
-*Bria and Jane, for all of the following please let me know if you think my conclusions are reasonable because I'm not confident about them at all.
+The test phase will be four blocks of ten trials. It starts with 60% maximally smiling agent A and 40% maximally smiling agent B and progresses in steps of 5% towards 60% maximally smiling agent B, which only takes 5 trials. I'd like to give participants two rounds of the smiling trials. Then the same thing is repeated for the frowning faces, and I would give two rounds of that as well. Their accuracy scores in the test phase will serve as the measure of their implicit learning. At the end, participants will be asked questions probing whether they detected the contingencies in the experiment and if they did their data will be excluded. 
 
-The original study doesn't say how many trials they had, so I'm hoping that the author responds to my request for stimuli and I can ask how many trials they did. However, if I can't ask them, I would say maybe two blocks of 25 trials would be good. Typically on implicit learning paradigms, it takes about 200 trials for people to show marked improvement, but on this task the stimuli are very repetitive and limited with what seems like only 4 different videos displayed over the many trials. The authors are also critical of how many trials most nonsocial implicit learning paradigms take, saying that that isn't realistic to social life. Lastly, they express that too many trials will allow participants to learn the contingency while too few will not allow them to learn at all. These are the things that lead me to believe there may be the total number of trials might have been around 50. Additionally, the paper does not say what response if any they asked their participants to do in the learning phase, but they do mention what response participants had in the test phase. This leads me to believe that they had no response in the learning phase, which would again mean you can't have too many trials or participants will get far too bored. The response in the test phase will ask participants to press "f" or "j" to indicate that they think the face is more identity A or B after viewing the video clip on each trial. In the nonsocial task, participants will do the same thing except identities A and B are actually circle vs. square.
 
-The test phase will be two blocks of 8 trials because it starts with 60% maximally smiling agent A and 40% maximally smiling agent B and progresses in steps of 5% towards 60% maximally smiling agent B, which only takes 4 trials. I'd like to give participants two rounds of the smiling trials. Then the same thing is repeated for the frowning faces, and I would give two rounds of that as well. Their accuracy scores in the test phase will serve as the measure of their implicit learning. At the end, participants will be asked questions probing whether they detected the contingencies in the experiment and if they did their data will be excluded. 
+In the original experiment, there is also a nonsocial task, but that will not be replicated due to feasibility on a very short timeline.
 
-Ideally I will be able to get the face stimuli from the authors to get the closest replication. Then the remaining task is to code the experiment to run the face stimuli correctly. I would likely use jspsych for that, which I anticipate will pose slight challenges but nothing I can’t overcome, especially with the support offered in class. 
+I attempted to get the face stimuli from the authors but was not successful. Thus the remaining tasks are to create the sitmuli and code the experiment to run the face stimuli correctly. I would likely use jspsych for that, which I anticipate will pose slight challenges but nothing I can’t overcome, especially with the support offered in class. 
+
+Do we need to add to the introduction?
 
 ## Methods
+60 adult participants were recruited for this study. The study was run on Prolific and participants were compensated for their time. The experiment took approximately 10-15 minutes to complete. Google Gemini was used to generate the face morph stimuli. The experiment was coded in JsPsych.
+
+There were two blocks of 28 trials in the acquisition phase. In the acquisition phase, the happy condition face started with gaze foward, smiling and gradually shifted to gaze away from the participant, frowning. The angry condition started with gaze forward, frowning and gradually shifted to gaze away from the participant, smiling. The clips were 2s long.
+
+There were four blocks of 10 trials in the test phase. The test phase began with a combined face of 60% maximally smiling agent A and 40% maximally smiling agent B and progressed in steps of 5% towards 60% maximally smiling agent B. Participants saw this four times. Then the same thing was repeated for the frowning faces, and the participants saw this four times as well. At the end, participants were asked questions probing whether they detected the contingencies in the experiment and if they did their data was excluded. 
 
 ### Power Analysis
 
 Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
 
-In this original experiment:
-The effect size for the main effect of disposition in the nonsocial task was np^2 = 0.12.
-The effect size of the main effect of proportion in the nonsocial task is np^2 = 0.35
-The effect size of the main effect for object in the social task was np^2 = 0.39
-The effect size of the main effect for proportion in the social task was np^2 = 0.2
-
+A power analysis run using a t-test in RStudio and the smallest original main effect of ηp^2 = 0.12 (disposition) found that I would need 547 participants to achieve a power of 80%. This was not feasible for my timeline so I instead ran the same test using the main effect of proportion (ηp^2 = 0.35), which returned n = 66. Therefore, 75 participants were recruited to leave room for unusable data. I recognize this may mean I will not have enough power to detect smaller effects, but recruiting 547 participants is not an option on my timeline.
 
 ### Planned Sample
 
@@ -80,6 +81,8 @@ You can comment this section out prior to final report with data collection.
 ### Data preparation
 
 Data preparation following the analysis plan.
+
+To prepare the data, I used RStudio. In RStudio, I first loaded the relevant libraries, such as tidyverse. Then, I imported the data from Profilic. Participants who detected the contingencies from the experiment were identified from the questionnaire and their data was excluded from further analysis. In the dataframe (tibble), columns for participants, responses, and correct responses were created. Additionally, each row was a different participant.
 	
 ```{r include=F}
 ### Data Preparation
@@ -96,6 +99,8 @@ Data preparation following the analysis plan.
 ### Confirmatory analysis
 
 The analyses as specified in the analysis plan.  
+
+A two-way repeated measures ANOVA with DISPOTION (2 levels) and PROPORTION (5 levels) as factors was performed on participant responses to the social task. This test was used because I needed to compare the means of multiple groups to see if there was a significant difference between them. A correlation was tested between the questionnaire on autistic trais and responses to the social task. This correlation test was completed because I was looking at the potential connection between autistic traits and performance on the task. 
 
 *Side-by-side graph with original graph is ideal here*
 
