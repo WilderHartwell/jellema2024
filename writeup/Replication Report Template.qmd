@@ -30,11 +30,14 @@ I attempted to get the face stimuli from the authors but was not successful. Thu
 Do we need to add to the introduction?
 
 ## Methods
+
 60 adult participants were recruited for this study. The study was run on Prolific and participants were compensated for their time. The experiment took approximately 10-15 minutes to complete. Google Gemini was used to generate the face morph stimuli. The experiment was coded in JsPsych.
 
-There were two blocks of 28 trials in the acquisition phase. In the acquisition phase, the happy condition face started with gaze foward, smiling and gradually shifted to gaze away from the participant, frowning. The angry condition started with gaze forward, frowning and gradually shifted to gaze away from the participant, smiling. The clips were 2s long.
 
-There were four blocks of 10 trials in the test phase. The test phase began with a combined face of 60% maximally smiling agent A and 40% maximally smiling agent B and progressed in steps of 5% towards 60% maximally smiling agent B. Participants saw this four times. Then the same thing was repeated for the frowning faces, and the participants saw this four times as well. At the end, participants were asked questions probing whether they detected the contingencies in the experiment and if they did their data was excluded. 
+There were two blocks of 28 trials in the acquisition phase. In the acquisition phase, the happy face condition started with gaze forward, smiling and gradually shifted to gaze away from the participant, frowning. The angry condition started with gaze forward, frowning and gradually shifted to gaze away from the participant, smiling. The clips were 2s long.
+
+
+There were four blocks of 10 trials in the test phase. The test phase began with a combined face of 60% maximally smiling agent A and 40% maximally smiling agent B and progressed in steps of 5% towards 60% maximally smiling agent B. Participants saw this four times. Then the same thing was repeated for the frowning faces, and the participants saw this four times as well. At the end, participants were asked questions probing whether they detected the contingencies in the experiment and if they did their data was excluded.
 
 ### Power Analysis
 
@@ -100,7 +103,7 @@ To prepare the data, I used RStudio. In RStudio, I first loaded the relevant lib
 
 The analyses as specified in the analysis plan.  
 
-A two-way repeated measures ANOVA with DISPOTION (2 levels) and PROPORTION (5 levels) as factors was performed on participant responses to the social task. This test was used because I needed to compare the means of multiple groups to see if there was a significant difference between them. A correlation was tested between the questionnaire on autistic trais and responses to the social task. This correlation test was completed because I was looking at the potential connection between autistic traits and performance on the task. 
+A two-way repeated measures ANOVA with DISPOSITION (2 levels) and PROPORTION (5 levels) as factors was performed on participant responses to the social task. This test was used because I needed to compare the means of multiple groups to see if there was a significant difference between them. A correlation was tested between the questionnaire on autistic traits and responses to the social task. This correlation test was completed because I was looking at the potential connection between autistic traits and performance on the task. 
 
 *Side-by-side graph with original graph is ideal here*
 
