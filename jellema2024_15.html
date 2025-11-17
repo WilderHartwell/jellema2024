@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Social Intuition</title>
+    <script src="https://unpkg.com/jspsych@8.2.2"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-video-keyboard-response@2.1.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+    <link href="https://unpkg.com/jspsych@8.2.2/css/jspsych.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body></body>
+  <script>
+
+  //* initialize jsPsych */
+const jsPsych = initJsPsych({
+});
+
+// Generate a participant ID
+const participantID = jsPsych.randomization.randomID(10);
+
+// Add participant ID to EVERY trial's data
+jsPsych.data.addProperties({
+  participantID: participantID
+});
+
+
+    /* create timeline */
+    var timeline = [];
+
+    /* preload videos */
+    var images = ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/40_frown.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/45_frown.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/50_frown.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/55_frown.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/60_frown.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/40_smile.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/45_smile.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/50_smile.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/55_smile.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/60_smile.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/neutral_frown.jpg', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/neutral_smile.jpg']
+    var video = ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/Frown_first_mirrored_distort_final.mp4', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/Frown_first_mirrored_distort_reverse.mp4', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/Smile_first_final.mp4', 'https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/Smile_first_reverse.mp4'];
+    var preload = {
+      type: jsPsychPreload,
+      video: video,
+      images: images
+    };
+    timeline.push(preload);
+ 
+
+    /* welcome message */
+    var welcome = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: "Welcome to the experiment. Press any key to begin."
+    };
+    timeline.push(welcome);
+
+  // Demographic survey
+    var demo_survey = {
+      type: jsPsychSurveyMultiChoice,
+      questions: [{
+        prompt: "What is your gender?",
+        name: 'Q_gender',
+        options: ['Woman', 'Man', 'Nonbinary/other'],
+        required: true
+      },
+      {
+        prompt: "What is your age?",
+        name: 'Q_age',
+        options: ['18-24', '25-34', '35-44', '45-54', '55 - 64', '65+'],
+        required: true
+      }]}
+
+      timeline.push(demo_survey);
+
+  // Survey Instructions
+    var instructions = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `
+      <p>Before you begin the experimental task, please respond to these questions with how much you agree or disagree.</p>
+      <p>Press any key to begin<p>
+      `
+    };
+    timeline.push(instructions);
+
+   
+
+    // AQ-10 survey
+    var survey = {
+      type: jsPsychSurveyMultiChoice,
+      questions: [{
+        prompt: "I often notice small sounds when others do not.",
+        name: 'Question1',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      },
+      {
+        prompt: "When I'm reading a story, I find it difficult to work out the characters' intentions.",
+        name: 'Question2',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      },
+      {
+        prompt: "I find it easy to “read between the lines” when someone is talking to me.",
+        name: 'Question3',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      },
+      {
+        prompt: "I usually concentrate more on the whole picture, rather than the small details.",
+        name: 'Question4',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      },
+      {
+        prompt: "I know how to tell if someone listening to me is getting bored.",
+        name: 'Question5',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      },
+      {
+        prompt: "I find it easy to do more than one thing at once.",
+        name: 'Question6',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      },
+      {
+        prompt: "I find it easy to work out what someone is thinking or feeling just by looking at their face.",
+        name: 'Question7',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      },
+      {
+        prompt: "If there is an interruption, I can switch back to what I was doing very quickly.",
+        name: 'Question8',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      },
+      {
+        prompt: "I like to collect information about categories of things.",
+        name: 'Question9',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      },
+      {
+        prompt: "I find it difficult to work out people's intentions.",
+        name: 'Question10',
+        options: ['Definitely Agree', 'Slightly Agree', 'Slightly Disagree', 'Definitely Disagree'],
+        required: true
+      }
+      ]
+    }
+    timeline.push(survey);
+
+// Update the instructions with the correct identity photos. Identity B is the distorted one
+    /* instructions */
+    var instructions2 = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `
+        <p>For a few minutes you will see videos of two characters (Identity A and Identity B) making faces.</p>
+        <p>On the <b>left</b> is <b>Identity A</b> and on the <b>right</b> is <b>Identity B</b>.
+        <p> <img src="https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/neutral_smile.jpg"
+          width="300" 
+          height="400"/> 
+          <img src="https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/neutral_frown.jpg"
+          width="300"
+          height="400"/></p> 
+        <p>All you need to do is watch the videos.</p>
+        <p>Be sure to focus on them, because this experiment will check if you're paying attention.</p>
+        <p>Press any key to begin.</p>
+      `,
+      post_trial_gap: 2000
+    };
+    timeline.push(instructions2);
+
+    /* test trials */
+    var acq_stimuli = [
+      { stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/Frown_first_mirrored_distort_final.mp4'] },
+      { stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/Frown_first_mirrored_distort_reverse.mp4'] },
+      { stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/Smile_first_final.mp4'] },
+      { stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/Smile_first_reverse.mp4'] }
+    ];
+
+    
+
+    var acq = {
+      type: jsPsychVideoKeyboardResponse,
+      stimulus: function() {
+  return jsPsych.timelineVariable('stimulus');
+},
+      data: {
+        trial_type: 'acquisition',
+        stimulus: jsPsych.timelineVariable('stimulus')
+      },
+      start: 0,
+      trial_ends_after_video: true,
+      rate: 1,
+      post_trial_gap: 1000
+    };
+    // block 1.1
+    var acq_procedure_11 = {
+      timeline: [acq],
+      timeline_variables: acq_stimuli,
+      randomize_order: true,
+      repetitions: 3,
+      response_ends_trial: false,
+    };
+    timeline.push(acq_procedure_11);
+
+    // Attention check 1.1
+    var attention_check_1 = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: '<p style="font-size:32px; color:black;">This is an attention check.</p>',
+      choices: ['Red', 'Green', 'Blue'],
+      prompt: "<p>Select 'Red' if you're paying attention.</p>"
+    };
+
+    timeline.push(attention_check_1);
+
+    //block 1.2
+    var acq_procedure_12 = {
+      timeline: [acq],
+      timeline_variables: acq_stimuli,
+      randomize_order: true,
+      repetitions: 2,
+      response_ends_trial: false,
+    };
+    timeline.push(acq_procedure_12);
+
+    // Attention check 1.2
+    var attention_check_2 = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: '<p style="font-size:32px; color:black;">This is an attention check.</p>',
+      choices: ['Red', 'Yellow', 'Blue'],
+      prompt: "<p>Select 'Blue' if you're paying attention.</p>"
+    };
+
+    timeline.push(attention_check_2);
+
+     //block 1.3
+    var acq_procedure_13 = {
+      timeline: [acq],
+      timeline_variables: acq_stimuli,
+      randomize_order: true,
+      repetitions: 2,
+      response_ends_trial: false,
+    };
+    timeline.push(acq_procedure_13);
+
+    // Define the break trial
+var break_block = {
+  type: jsPsychHtmlKeyboardResponse, 
+  stimulus: `
+            <p><b>Break</b></p>
+            <p>Please take a break. When you are ready, you can continue with the experiment by pressing the Space bar.</p>
+            `,
+  choices: [' ', 'Space'], // The key(s) that will end the break trial
+  // optional: add data to the break trial
+  data: {
+    trial_type: 'break'
+  }
+};
+timeline.push(break_block)
+
+// block 2.1
+var acq_procedure_21 = {
+      timeline: [acq],
+      timeline_variables: acq_stimuli,
+      randomize_order: true,
+      repetitions: 3,
+      response_ends_trial: false,
+    };
+    timeline.push(acq_procedure_21);
+
+  // attention check 2.1
+  var attention_check_3 = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: '<p style="font-size:32px; color:black;">This is an attention check.</p>',
+      choices: ['Orange', 'Green', 'Yellow'],
+      prompt: "<p>Select 'Yellow' if you're paying attention.</p>"
+    };
+
+    timeline.push(attention_check_3);
+
+// block 2.2
+var acq_procedure_22 = {
+      timeline: [acq],
+      timeline_variables: acq_stimuli,
+      randomize_order: true,
+      repetitions: 2,
+      response_ends_trial: false,
+    };
+    timeline.push(acq_procedure_22);
+
+// attention check 2.2
+  var attention_check_4 = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: '<p style="font-size:32px; color:black;">This is an attention check.</p>',
+      choices: ['Orange', 'Purple', 'Green'],
+      prompt: "<p>Select 'Orange' if you're paying attention.</p>"
+    };
+
+    timeline.push(attention_check_4);
+
+// block 2.3
+var acq_procedure_23 = {
+      timeline: [acq],
+      timeline_variables: acq_stimuli,
+      randomize_order: true,
+      repetitions: 2,
+      response_ends_trial: false,
+    };
+    timeline.push(acq_procedure_23);
+    
+//Instruction for test trials
+var instructions_3 = {
+  type: jsPsychHtmlKeyboardResponse,
+      stimulus: `
+        <p>You will see faces and you must decide if the face looks more like Identity A or Identity B.</p>
+        <p>Press <b>F</b> for identity A and <b>J</b> for Identity B.</p>
+        <p>Press any key to begin.</p>
+      `,
+      post_trial_gap: 2000
+    };
+    timeline.push(instructions_3);
+
+var test_stimuli = [
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/40_frown.jpg'], correct_response: 'j'}, //40% identity B, 60% identiy A
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/45_frown.jpg'], correct_response: 'j'}, //45% identity B, 55% identity A
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/50_frown.jpg'], correct_response: 'j'}, //50% identiy B, 50% identity A MUST RESEARCH HOW TO INCLUDE TWO CORRECT VALUES
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/55_frown.jpg'], correct_response: 'j'}, //55% identity B, 45% identity A
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/60_frown.jpg'], correct_response: 'j'}, //60% identity B, 45% identiy A
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/40_smile.jpg'], correct_response: 'f'}, //40% identity B, 60% identiy A
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/45_smile.jpg'], correct_response: 'f'}, //45% identity B, 55% identity A
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/50_smile.jpg'], correct_response: 'f'}, //50% identiy B, 50% identity A MUST RESEARCH HOW TO INCLUDE TWO CORRECT VALUES
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/55_smile.jpg'], correct_response: 'f'}, //55% identity B, 45% identity A
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/60_smile.jpg'], correct_response: 'f'} //60% identity B, 45% identiy A
+];
+// Define the first and second sets of test stimuli
+var test_stimuli = [
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/40_frown.jpg'], correct_response: 'j'},
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/45_frown.jpg'], correct_response: 'j'},
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/50_frown.jpg'], correct_response: 'j'},
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/55_frown.jpg'], correct_response: 'j'},
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/60_frown.jpg'], correct_response: 'j'},
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/40_smile.jpg'], correct_response: 'f'},
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/45_smile.jpg'], correct_response: 'f'},
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/50_smile.jpg'], correct_response: 'f'},
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/55_smile.jpg'], correct_response: 'f'},
+  {stimulus: ['https://raw.githubusercontent.com/WilderHartwell/jellema2024/main/data/stim/60_smile.jpg'], correct_response: 'f'}
+];
+
+// Randomly decide whether frown or smile set comes first
+//var test_order = jsPsych.randomization.shuffle([test_stimuli_set1, test_stimuli_set2]);
+
+// Combine the two sets in that order
+//var test_stimuli = test_order[0].concat(test_order[1]);
+
+// Define the test trial
+var test = {
+  type: jsPsychImageKeyboardResponse,
+  stimulus: jsPsych.timelineVariable('stimulus'),
+  choices: ['f', 'j'],
+  data: {
+    task: 'response',
+    correct_response: jsPsych.timelineVariable('correct_response'),
+    stimulus: jsPsych.timelineVariable('stimulus')
+    
+  },
+  on_finish: function(data){
+        // normalize response to a character ('f' or 'j') and compare to correct_response
+        var resp = data.response;
+        if (Array.isArray(resp)) resp = resp[0];
+        if (typeof resp === 'number'){
+          // common keyCodes for letters: F=70, J=74
+          if (resp === 70) resp = 'f';
+          else if (resp === 74) resp = 'j';
+          else {
+            try {
+              resp = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(resp).toLowerCase();
+            } catch(e){
+              resp = String(resp).toLowerCase();
+            }
+          }
+        }
+        if (typeof resp === 'string') resp = resp.toLowerCase();
+        var corr = data.correct_response;
+        if (typeof corr === 'string') corr = corr.toLowerCase();
+        data.correct = (resp === corr);
+      },
+  post_trial_gap: 1000,
+  prompt:`<p><b>F</b> = Identity A, <b>J</b> = Identity B</p>`,
+  stimulus_height: 833.9,
+  stimulus_width: 1550
+};
+
+// Define the test procedure
+var test_procedure = {
+  timeline: [test],
+  timeline_variables: test_stimuli,
+  randomize_order: false, // preserve order within each set
+  repetitions: 2,
+  response_ends_trial: true
+};
+
+timeline.push(test_procedure);
+
+
+
+// Post-experiment questionnaire
+var survey_2 = {
+  type: jsPsychSurveyMultiChoice,
+  questions: [
+    {
+      prompt: "What was the disposition of Identity A towards you?",
+      name: 'CheckQ1',
+      options: ['Positive', 'Neutral', 'Negative', 'I do not know'],
+      required: true
+    },
+    {
+      prompt: "What was the disposition of Identity B towards you?",
+      name: 'CheckQ2',
+      options: ['Positive', 'Neutral', 'Negative', 'I do not know'],
+      required: true
+    },
+  ]
+}
+timeline.push(survey_2);
+
+// This ID is provided by pipe.jspsych.org.
+const expID = "bwwbl5eJeBwl";
+
+// The participant ID will be generated above and added to each trial's data.
+
+const save_data = {
+  type: jsPsychPipe,
+  action: "save",
+  experiment_id: expID,
+  filename: `${participantID}.csv`,
+  data_string: ()=>jsPsych.data.get().csv()
+};
+timeline.push(save_data);
+
+var thank_you = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: `
+  <p>Thank you for taking the time to complete this experiment!</p>
+  <p>This study was about social intuition.</p>
+  <p>It was exploring whether participants could implicitly learn the disposition of the actors.</p>
+  <p></p>
+  <p>Here is your completion code: CZSUN3SD </p>
+  <p>Copy this link to be taken back to Prolific: https://app.prolific.com/submissions/complete?cc=CZSUN3SD </p>
+  <p>Once you have the information you need to submit your completion, press space to end the experiment.</p>
+  `,
+  choices: [' ', 'Space']
+}
+timeline.push(thank_you)
+
+    /* start the experiment */
+    jsPsych.run(timeline);
+  </script>
+</html>
